@@ -1,7 +1,10 @@
-package cviko09.zadanie;
+package cviko09.uloha2;
+
+// kontrola gramatiky cez SERVICE
 
 import java.util.List;
 
+import cviko09.uloha2.SpellCheckerService;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,17 +30,9 @@ public class MainApp extends Application {
 		primaryStage.setTitle("KOPR editor");
 		primaryStage.show();
 		
-		textArea.textProperty().addListener(new ChangeListener<String>() {
-
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				SpellChecker spellChecker = new SpellChecker();
-				final List<SpellChecker.SpellcheckBoundary> kontrola = spellChecker.check(newValue);
-				boolean isOK = kontrola.isEmpty();
-				System.out.println(newValue + " kontrola ok: " + isOK);		
-				redGreenPane.setGreenState(isOK);
-			}
-		});
+		SpellCheckerService service = new SpellCheckerService(textArea.textProperty());
+		redGreenPane.greenStateProperty().bind(service.valueProperty());
+		service.start();
 	}
 
 	public static void main(String[] args) {
@@ -46,4 +41,3 @@ public class MainApp extends Application {
 	
 	
 }
-

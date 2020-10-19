@@ -1,4 +1,4 @@
-package cviko09.zadanie;
+package cviko09.uloha2;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class SpellChecker {
 			end = iterator.next();
 		}
 	
-		//simulacia dlheho vypoctu
+		//simulácia dlhého výpočtu
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
